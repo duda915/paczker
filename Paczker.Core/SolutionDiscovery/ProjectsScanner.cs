@@ -1,27 +1,29 @@
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using LanguageExt.Common;
-using Paczker.Infrastructure.Exception;
+using LanguageExt;
+using net.r_eg.MvsSln;
+using Paczker.Domain.Model;
 
 namespace Paczker.Core.SolutionDiscovery
 {
     public static class ProjectsScanner
     {
-        public static Result<IEnumerable<string>> GetAllProjectsInDirectory(string path)
+        public static IEnumerable<Option<Project>> GetAllProjectsInSln(string slnPath)
         {
-            if (!Directory.Exists(path))
+            using var sln = new Sln(slnPath, SlnItems.Projects);
+            return sln.Result.ProjectItems.Select(x =>
             {
-                  return new Result<IEnumerable<string>>(new NotExistsException($"Directory {path} not exists"));
-            }
+                var fullPath = Path.GetFullPath(x.fullPath.Replace('\\', '/'));
+                return ProjectsFactory.MapCsProj(GetProjectNameFromPath(fullPath), fullPath);
+            });
+        }
 
-            var directories = Directory.GetDirectories(path);
-
-            var projects = directories
-                .SelectMany(Directory.GetFiles)
-                .Where(x => x.EndsWith(".csproj") || x.EndsWith(".fsproj"));
-            
-            return new Result<IEnumerable<string>>(projects);
+        public static string GetProjectNameFromPath(string csprojPath)
+        {
+            return Path.GetFileNameWithoutExtension(csprojPath);
         }
     }
 }

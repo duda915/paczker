@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>Paczker</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Paczker.Core\Paczker.Core.csproj" />
+      <ProjectReference Include="..\Paczker.Facade\Paczker.Facade.csproj" />
+    </ItemGroup>
+
+</Project>

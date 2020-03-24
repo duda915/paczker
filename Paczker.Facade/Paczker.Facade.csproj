@@ -5,15 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LanguageExt.Core" Version="3.4.10" />
-
-        <PackageReference Include="MvsSln" Version="2.5.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Paczker.Domain\Paczker.Domain.csproj" />
+      <ProjectReference Include="..\Paczker.Core\Paczker.Core.csproj" />
       <ProjectReference Include="..\Paczker.Infrastructure\Paczker.Infrastructure.csproj" />
     </ItemGroup>
-        
-    
+
 </Project>

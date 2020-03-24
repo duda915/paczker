@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using LanguageExt;
@@ -9,31 +10,39 @@ namespace Paczker.Core.ProjectManipulator
 {
     public static class NodeFinder
     {
-        public static Option<XmlNode> GetVersionNode(XmlDocument doc, VersionNode versionNode)
+        public static Option<XmlNode> GetVersionNode(XmlDocument document, VersionNode versionNode)
         {
-            return doc.DocumentElement.SelectSingleNode(GetNodeStringMap()[versionNode]);
+            return document.DocumentElement.SelectSingleNode(GetNodeStringMap()[versionNode]);
         }
         
-        public static Option<string> GetVersionNodeValue(XmlDocument doc, VersionNode versionNode) =>
-            GetVersionNode(doc, versionNode).Select(x => x.InnerText);
-
-        public static Option<XmlNodeList> GetProjectReferenceNodes(XmlDocument doc)
+        public static Option<XmlNode> GetReadOnlyVersionNode(string csprojPath, VersionNode versionNode)
         {
-            return doc.DocumentElement.SelectNodes("/Project/ItemGroup/ProjectReference");
+            var doc = ProjectLoader.Load(csprojPath);
+            return GetVersionNode(doc, versionNode);
+        }
+        
+        public static Option<string> GetVersionNodeValue(string csprojPath, VersionNode versionNode) =>
+            GetReadOnlyVersionNode(csprojPath, versionNode).Select(x => x.InnerText);
+
+        private static Option<XmlNodeList> GetProjectReferenceNodes(string csprojPath)
+        {
+            var doc = ProjectLoader.Load(csprojPath);
+            var nodes = doc.DocumentElement.SelectNodes("/Project/ItemGroup/ProjectReference");
+            return nodes.Count > 0 ? Optional(nodes) : None;
         }
 
-        public static IEnumerable<string> GetProjectReferenceNodeValues(XmlDocument doc)
+        public static IEnumerable<string> GetProjectReferencePaths(string csprojPath)
         {
-            var xmlNodes = GetProjectReferenceNodes(doc);
+            var xmlNodes = GetProjectReferenceNodes(csprojPath);
             
-            return xmlNodes.Match(x =>
-            {
-                return Range(0, x.Count)
+            return xmlNodes.Bind(x => 
+                    Range(0, x.Count)
                     .Select(y => Optional(x[y].Attributes["Include"]?.InnerText))
-                    .Select(y => y.Replace("\\", "/"))
-                    .Where(y => y.IsSome)
-                    .Select(y => y.ValueUnsafe());
-            }, new string[0]);
+                    .MapT(y => y.Replace('\\', '/'))
+                    .MapT(y => Path.Combine(Path.GetDirectoryName(csprojPath), y))
+                    .MapT(Path.GetFullPath)
+                    .Choose(y => y)
+            );
         }
             
         private static Map<VersionNode, string> GetNodeStringMap()

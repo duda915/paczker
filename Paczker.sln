@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker", "Paczker\Paczker.csproj", "{3FE5FB45-425C-43C4-B05D-29BA77FACC1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.ConsoleFront", "Paczker.ConsoleFront\Paczker.ConsoleFront.csproj", "{3FE5FB45-425C-43C4-B05D-29BA77FACC1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.Core", "Paczker.Core\Paczker.Core.csproj", "{46A79620-1606-4C9B-8FF7-2BDA372B0316}"
 EndProject
@@ -11,6 +11,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.Core.Tests", "Paczker.Core.Tests\Paczker.Core.Tests.csproj", "{1615059B-DC63-4C3B-8B5D-07705F778123}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.Infrastructure", "Paczker.Infrastructure\Paczker.Infrastructure.csproj", "{8C62D9D6-F6EC-445A-B748-FF863612C06B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.Facade", "Paczker.Facade\Paczker.Facade.csproj", "{A019EE82-3F99-4526-A4D5-75EE139BF377}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paczker.Domain", "Paczker.Domain\Paczker.Domain.csproj", "{E608F956-6359-49E6-986E-B9684BD932B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,11 +38,21 @@ Global
 		{8C62D9D6-F6EC-445A-B748-FF863612C06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C62D9D6-F6EC-445A-B748-FF863612C06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C62D9D6-F6EC-445A-B748-FF863612C06B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A019EE82-3F99-4526-A4D5-75EE139BF377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A019EE82-3F99-4526-A4D5-75EE139BF377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A019EE82-3F99-4526-A4D5-75EE139BF377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A019EE82-3F99-4526-A4D5-75EE139BF377}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E608F956-6359-49E6-986E-B9684BD932B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E608F956-6359-49E6-986E-B9684BD932B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E608F956-6359-49E6-986E-B9684BD932B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E608F956-6359-49E6-986E-B9684BD932B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3FE5FB45-425C-43C4-B05D-29BA77FACC1E} = {C188E594-CEA0-4AED-B825-E6C0AD84D759}
 		{46A79620-1606-4C9B-8FF7-2BDA372B0316} = {C188E594-CEA0-4AED-B825-E6C0AD84D759}
 		{1615059B-DC63-4C3B-8B5D-07705F778123} = {1FAA181E-59EA-4D50-9ECC-3BA7CFF96DFD}
 		{8C62D9D6-F6EC-445A-B748-FF863612C06B} = {C188E594-CEA0-4AED-B825-E6C0AD84D759}
+		{A019EE82-3F99-4526-A4D5-75EE139BF377} = {C188E594-CEA0-4AED-B825-E6C0AD84D759}
+		{E608F956-6359-49E6-986E-B9684BD932B8} = {C188E594-CEA0-4AED-B825-E6C0AD84D759}
 	EndGlobalSection
 EndGlobal
